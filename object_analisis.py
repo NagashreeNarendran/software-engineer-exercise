@@ -15,6 +15,7 @@ def aboundant(objects):
     for o in objects:
         if o['type'] == 'frb':
             sum_supernovae += 1
+    
     if sum_stars >= sum_galaxies and sum_stars >= sum_supernovae and sum_stars >= sum_frbs:
         return 'stars'
     if sum_galaxies >= sum_stars and sum_galaxies >= sum_supernovae and sum_galaxies >= sum_frbs:
@@ -24,7 +25,8 @@ def aboundant(objects):
     if sum_frbs >= sum_stars and sum_frbs >= sum_galaxies and sum_frbs >= sum_supernovae:
         return 'frbs'
 
-input = """
+#Retaining the original input
+input_1 = """
 [
     {
         "type": "star",
@@ -43,10 +45,65 @@ input = """
     }
 ]
 """
+#Removed "type":"stars" alone from the original input
+input_2 = """
+[
+    {
+        "type": "nebula",
+        "name": "crab",
+        "redshift": 3
+    },
+    {
+        "type": "galaxy",
+        "name": "sombrero",
+        "redshift": 5
+    }
+]
+"""
+
+#Retaining the original input
+input_3 = """
+[
+    {
+        "type": "star",
+        "name": "alpha-centaurus",
+        "redshift": 1
+    },
+    {
+        "type": "nebula",
+        "name": "crab",
+        "redshift": 3
+    },
+    {
+        "type": "galaxy",
+        "name": "sombrero",
+        "redshift": 2
+    },
+    {
+        "type": "star",
+        "name": "alpha-centaurus_2",
+        "redshift": 4
+    }
+]
+"""
+
+#Removed "type":"stars" and "type":"galaxy" from the original input
+input_4 = """
+[
+    {
+        "type": "nebula",
+        "name": "crab",
+        "redshift": 0
+    }
+]
+"""
 
 import json
-print(aboundant(json.loads(input)))
 
+print(aboundant(json.loads(input_1)))
+print(aboundant(json.loads(input_2)))
+print(aboundant(json.loads(input_3)))
+print(aboundant(json.loads(input_4)))
 
 def farthest(objects):
     highest_redshift = None
@@ -57,4 +114,7 @@ def farthest(objects):
         if o["redshift"] == highest_redshift:
             return o
 
-print(farthest(json.loads(input)))
+print(farthest(json.loads(input_1)))
+print(farthest(json.loads(input_2)))
+print(farthest(json.loads(input_3)))
+print(farthest(json.loads(input_4)))
